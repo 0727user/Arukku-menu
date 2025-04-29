@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aruuku Cofe</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
+      text-align: right;
+      background-color: #000;
+      color: #fff;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      padding: 30px 0;
+      border-bottom: 1px solid #fff;
+    }
+    header h1 {
+      font-size: 2.5rem;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #000;
+      padding: 10px 0;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    .tab {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active {
+      border-bottom: 2px solid #fff;
+    }
+    .menu-section {
+      display: none;
+      margin: 30px 10px;
+    }
+    .menu-section.active {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .menu-item {
+      background: #111;
+      padding: 15px;
+      border-radius: 10px;
+      width: 250px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .menu-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .menu-item h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2rem;
+    }
+    .menu-item p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+    .price {
+      font-weight: bold;
+      float: left;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 600px) {
+      .menu-item {
+        width: 90%;
+      }
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Arukku Cafe</h1>
+  <p>Arukku-Menu</p>
+</header>
+
+<nav>
+  <div class="tab active" onclick="showMenu('espresso-bar')">بار گرم (بر پایه اسپرسو)</div>
+  <div class="tab" onclick="showMenu('hot-drinks')">نوشیدنی گرم</div>
+  <div class="tab" onclick="showMenu('cold-bar')">بار سرد</div>
+  <div class="tab" onclick="showMenu('shakes')">شیک بستنی</div>
+  <div class="tab" onclick="showMenu('smoothies')">اسموتی</div>
+  <div class="tab" onclick="showMenu('mocktails')">ماکتل</div>
+  <div class="tab" onclick="showMenu('cakes')">کیک</div>
+  <div class="tab" onclick="showMenu('additives')">افزودنی‌ها</div>
+</nav>
+
+
+<!--bar garm-->
+<section id="espresso-bar" class="menu-section active">
+  <div class="menu-item" onclick="openModal('اسپرسو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-Espresso.png', '۱۸ گرم دان قهوه مدیوم رست ۵۰/۵۰')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-Espresso.png" alt="Espresso">
+    <h3>اسپرسو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">80,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('ماکیاتو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-maccjiato.png', 'یک دبل شات اسپرسو + لکه‌ای از فوم شیر')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-maccjiato.png" alt="Macchiato">
+    <h3>ماکیاتو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">85,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کورتادو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-cortado.png', 'یک دبل شات اسپرسو + ۶۰ میل شیر فوم داده شده')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-cortado.png" alt="cortaduo">
+    <h3>کورتادو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کوبانو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-cubano.png', 'یک دبل شات اسپرسو + شکر قهوه ای')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-cubano.png" alt="Cubano">
+    <h3>کوبانو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">83,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('بم بن', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-bombon.png', 'شیر عسلی + اسپرسو + لکه‌ای از فوم شیر')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-bombon.png" alt="Bombem">
+    <h3>بم بن</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">120,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کارامل ماکیاتو ', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-caramel macchiato.png', 'یک دبل شات اسپرسو + لکه‌ای از فوم شیر + سیروپ کارامل')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-caramel macchiato.png" alt="Caramel Macchiato">
+    <h3>کارامل ماکیاتو </h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('آمریکانو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-americano.png', 'یک دبل شات اسپرسو + ۱۲۰ میل آب')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-hotbarbasedEspresso-americano.png" alt="Americano">
+    <h3>آمریکانو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">80,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('لته', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو + شیر فوم داده شده')">
+    <!-- <img src="/path/to/your-image.jpg" alt="latte"> -->
+    <h3>لته</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">100,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کاپوچینو ', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شیر با فوم سنگین + پودر کاکائو')">
+    <!-- <img src="/path/to/your-image.jpg" alt="cappuccino"> -->
+    <h3>کاپوچینو </h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('فلت وایت ', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شیر گرم بدون فوم')">
+    <!-- <img src="/path/to/your-image.jpg" alt="falt white"> -->
+    <h3>فلت وایت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">95,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('موکا', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شیر فوم داده شده+ شکلات آب شده')">
+    <!-- <img src="/path/to/your-image.jpg" alt="mocha"> -->
+    <h3>موکا</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">120,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کن هیلو', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو + یک حبه یخ')">
+    <!-- <img src="/path/to/your-image.jpg" alt="hielo"> -->
+    <h3>کن هیلو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">80,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کارامل باتر فینگر لته', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شیر فوم داده شده+ سیروپ کارامل+ کره بادام زمینی')">
+    <!-- <img src="/path/to/your-image.jpg" alt="caramel latte"> -->
+    <h3>کارامل باتر فینگر لته</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">140,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('اورنج موکا', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو + شیر فوم داده شده+ شکلات آب شده+ پرتقال')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Orange mocha"> -->
+    <h3>اورنج موکا</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">130,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('فایر اسپرسو', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ فلفل قرمز+ شکلات اب شده')">
+    <!-- <img src="/path/to/your-image.jpg" alt="fire mocha"> -->
+    <h3>فایر اسپرسو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('لته اسپایسی', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شیر فوم داده شده+ فلفل قرمز+ دارچین+ جوز هندی')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Spisy mocha"> -->
+    <h3>لته اسپایسی</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">145,000 تومان</span></h2>
+  </div>
+</section>
+
+<!--noshidani garm-->
+<section id="hot-drinks" class="menu-section">
+  <div class="menu-item" onclick="openModal('هات چاکلت', '/path/to/your-image.jpg', 'شکلات تلخ + شیر')">
+    <!-- <img src="/path/to/your-image.jpg" alt="hotchoclet"> -->
+    <h3>هات چاکلت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">88,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('وایت چاکلت', '/path/to/your-image.jpg', 'شکلات سفید + شیر')">
+    <!-- <img src="/path/to/your-image.jpg" alt="whitechoclet"> -->
+    <h3>وایت چاکلت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">85,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('پینک چاکلت', '/path/to/your-image.jpg', 'شکلات صورتی + شیر')">
+    <!-- <img src="/path/to/your-image.jpg" alt="pinkchoclet"> -->
+    <h3>پینک چاکلت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">96,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('پینک چاکلت', '/path/to/your-image.jpg', 'شکلات صورتی + شیر')">
+    <!-- <img src="/path/to/your-image.jpg" alt="pinkchoclet"> -->
+    <h3>پینک چاکلت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">96,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('نات چاکلت', '/path/to/your-image.jpg', 'شکلات داغ فندقی تا تکه های ریز فندق + شیر')">
+    <!-- <img src="/path/to/your-image.jpg" alt="nutchoclet"> -->
+    <h3>نات چاکلت</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('چای', '/path/to/your-image.jpg', )">
+    <!-- <img src="/path/to/your-image.jpg" alt="tea"> -->
+    <h3>چای</h3>
+    <h2><span class="price">40,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('چای کوچک', '/path/to/your-image.jpg', )">
+    <!-- <img src="/path/to/your-image.jpg" alt="small-tea"> -->
+    <h3>چای کوچک</h3>
+    <h2><span class="price">35,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('چای انگلیسی', '/path/to/your-image.jpg' ,'چای+عسل+ شیر فوم داده شده' )">
+    <!-- <img src="/path/to/your-image.jpg" alt="eng-tea"> -->
+    <h3>چای انگلیسی</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">70,000 تومان</span></h2>
+  </div>
+</section>
+
+<!--bar sard-->
+<section id="cold-bar" class="menu-section">
+  <div class="menu-item" onclick="openModal('آیس امریکانو', '/path/to/your-image.jpg', 'اسپرسو + آب سرد + یخ')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Iced americano"> -->
+    <h3>آیس امریکانو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">80,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('آیس موکا', '/path/to/your-image.jpg', 'اسپرسو + شیر سرد + یخ')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Iced mocha"> -->
+    <h3>آیس موکا </h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">100,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('آیس لاته', '/path/to/your-image.jpg', 'اسپرسو + شیر سرد + سس شکلات + یخ')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Iced Latte"> -->
+    <h3>آیس لاته</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('فراپه', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو + بستنی + شیر + یخ خرد شده')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Frape"> -->
+    <h3>فراپه</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('کوک اسپرسو', '/path/to/your-image.jpg', 'کوکاکولا+ اسپرسو')">
+    <!-- <img src="/path/to/your-image.jpg" alt="coca sperco"> -->
+    <h3>کوک اسپرسو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('فیزی کافه ', '/path/to/your-image.jpg', 'آب گازدار+یک دبل شات اسپرسو')">
+    <!-- <img src="/path/to/your-image.jpg" alt="fizy coffe"> -->
+    <h3>فیزی کافه</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">100,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('اسپرایت اسپرسو', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ اسپرایت')">
+    <!-- <img src="/path/to/your-image.jpg" alt="sprite sperco"> -->
+    <h3>اسپرایت اسپرسو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('ایس اند فایر', '/path/to/your-image.jpg', 'یک دبل شات اسپرسو+ شکلات اب شده+ فلفل قرمز+ شیر + یخ')">
+    <!-- <img src="/path/to/your-image.jpg" alt="ice and fire "> -->
+    <h3>ایس اند فایر</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">120,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('ایس رومانو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-ColdDrink-Ice Romano.png', 'یک دبل شات اسپرسو + آب لیمو تازه + آب + یخ')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-ColdDrink-Ice Romano.png" alt="juice fruit">
+    <h3>ایس رومانو</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('اب میوه فصل', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="juice fruit"> -->
+    <h3>اب میوه فصل</h3>
+    <p>برای نمایش جزئیات کلیک کنید</p>
+    <h2><span class="price">80,000 تومان</span></h2>
+  </div>
+</section>
+
+<!--shake bastani-->
+<section id="shakes" class="menu-section">
+  <div class="menu-item" onclick="openModal('شیک وانیل', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt=" vanilla shake"> -->
+    <h3>شیک وانیل</h3>
+    <h2><span class="price">125,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک شکلاتی', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Chocolate Shake"> -->
+    <h3>شیک شکلاتی</h3>
+    <h2><span class="price">125,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک موز شکلات', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="banana and choclate Shake"> -->
+    <h3>شیک موز شکلات </h3>
+    <h2><span class="price">145,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک نوتلا', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="nutella Shake"> -->
+    <h3>شیک نوتلا</h3>
+    <h2><span class="price">155,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک پروتیین', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="protien Shake"> -->
+    <h3>شیک پروتیین</h3>
+    <h2><span class="price">170,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک اسپرسو کارامل', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="espresso caramel Shake"> -->
+    <h3>شیک اسپرسو کارامل</h3>
+    <h2><span class="price">150,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک توت فرنگی', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="strawberry Shake"> -->
+    <h3>شیک توت فرنگی</h3>
+    <h2><span class="price">140,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک اسپرسو', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="espresso Shake"> -->
+    <h3>شیک اسپرسو</h3>
+    <h2><span class="price">130,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('شیک کره بادام زمینی', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="peanut Shake"> -->
+    <h3>شیک کره بادام زمینی</h3>
+    <h2><span class="price">150,000 تومان</span></h2>
+  </div>
+</section>
+
+
+<!-- mocktails -->
+<section id="mocktails" class="menu-section">
+  <div class="menu-item" onclick="openModal('آیس بلاد', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="]Ice Blood"> -->
+    <h3>آیس بلاد</h3>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('سانرایر', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Mocktail-sunrise.png')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Mocktail-sunrise.png" alt="sunrise">
+    <h3>سانرایر</h3>
+    <h2><span class="price">125,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('موهیتو', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="mohito"> -->
+    <h3>موهیتو</h3>
+    <h2><span class="price">95,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('لیموناد', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="lemenade"> -->
+    <h3>لیموناد</h3>
+    <h2><span class="price">90,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('رد موهیتو', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-mocktail-redmohito.jpg')">
+    <!-- <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-mocktail-redmohito.jpg" alt="red mohito"> -->
+    <h3>رد موهیتو</h3>
+    <h2><span class="price">100,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('بلو موهیتو ', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="blue mohito"> -->
+    <h3>بلو موهیتو </h3>
+    <h2><span class="price">110,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('رد سان', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Mocktail-redsun.png')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Mocktail-redsun.png" alt="Red sun">
+    <h3>رد سان</h3>
+    <h2><span class="price">125,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('سیگنیچر بار تندر', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="bartender signicher"> -->
+    <h3>سیگنیچر بار تندر</h3>
+    <h2><span class="price">140,000 تومان</span></h2>
+  </div>
+</section>
+
+
+<!-- smouti -->
+<section id="smoothies" class="menu-section">
+  <div class="menu-item" onclick="openModal('استوایی ', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-Tropical drink.png')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-Tropical drink.png" alt=" Smoothie">
+    <h3>استوایی</h3>
+    <h2><span class="price">140,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('بلو اسکای', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-blueSky.png')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-blueSky.png" alt=" blue sky">
+    <h3>بلو اسکای</h3>
+    <h2><span class="price">120,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('آروکو ', '/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-Arukku.png')">
+    <img src="/Users/GP/OneDrive/Desktop/Arukku menu/img/Arukku-Smoothie-Arukku.png" alt=" arukku">
+    <h3>آروکو</h3>
+    <h2><span class="price">145,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('یونی کورن', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt=" unicorn"> -->
+    <h3>یونی کورن</h3>
+    <h2><span class="price">130,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('لواشک', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt=" unicorn"> -->
+    <h3>لواشک</h3>
+    <h2><span class="price">120,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('اسموتی روز', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt=" daily smoothie"> -->
+    <h3>اسموتی روز</h3>
+    <h2><span class="price">130,000 تومان</span></h2>
+  </div>
+</section>
+
+<!-- cake -->
+<section id="cakes" class="menu-section">
+  <div class="menu-item" onclick="openModal('چیزکیک شکلاتی', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="Chocolate Cheesecake"> -->
+    <h3>کیک شکلاتی</h3>
+    <h2><span class="price">85,000 تومان</span></h2>
+  </div>
+</section>
+
+<!-- other -->
+<section id="additives" class="menu-section">
+  <div class="menu-item" onclick="openModal('سیروپ', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="sirup"> -->
+    <h3>سیروپ</h3>
+    <h2><span class="price">20,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('موز', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="banana"> -->
+    <h3>موز</h3>
+    <h2><span class="price">20,000 تومان</span></h2>
+  </div>
+  <div class="menu-item" onclick="openModal('یک اسکوپ بستنی', '/path/to/your-image.jpg')">
+    <!-- <img src="/path/to/your-image.jpg" alt="icecream"> -->
+    <h3>یک اسکوپ بستنی</h3>
+    <h2><span class="price">20,000 تومان</span></h2>
+  </div>
+</section>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <h2 id="modal-title"></h2>
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
+<script>
+  function showMenu(category) {
+    const sections = document.querySelectorAll('.menu-section');
+    const tabs = document.querySelectorAll('.tab');
+  
+    sections.forEach(section => {
+      section.classList.remove('active');
+    });
+  
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+    });
+  
+    document.getElementById(category).classList.add('active');
+    event.target.classList.add('active');
+  }
+  
+  function openModal(title, imgSrc, desc) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-desc').innerText = desc;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
