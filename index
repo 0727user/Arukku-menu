@@ -259,12 +259,6 @@
     <p>برای نمایش جزئیات کلیک کنید</p>
     <h2><span class="price">96,000 تومان</span></h2>
   </div>
-  <div class="menu-item" onclick="openModal('پینک چاکلت', '/path/to/your-image.jpg', 'شکلات صورتی + شیر')">
-    <!-- <img src="/path/to/your-image.jpg" alt="pinkchoclet"> -->
-    <h3>پینک چاکلت</h3>
-    <p>برای نمایش جزئیات کلیک کنید</p>
-    <h2><span class="price">96,000 تومان</span></h2>
-  </div>
   <div class="menu-item" onclick="openModal('نات چاکلت', '/path/to/your-image.jpg', 'شکلات داغ فندقی تا تکه های ریز فندق + شیر')">
     <!-- <img src="/path/to/your-image.jpg" alt="nutchoclet"> -->
     <h3>نات چاکلت</h3>
